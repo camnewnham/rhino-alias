@@ -1,0 +1,32 @@
+name: Yak Release
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+      - '*.*.*-pre'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+      
+    - name: Build
+      run: msbuild /restore /p:Configuration=Release /p:TargetFramework=net48 /p:Version=${{ github.ref_name }}
+      
+    - name: Download Yak
+      run:  curl https://files.mcneel.com/yak/tools/latest/yak.exe -o yak.exe
+      
+    - name: Yak Build
+      working-directory: ./bin/Release/net48
+      run: |
+        ..\..\..\yak build --version ${{ github.ref_name }}
+        Rename-Item -Path (dir *.yak).Name -NewName ((dir *.yak).Name -replace '-rh.+\.yak','-any-any.yak')
+        ..\..\..\yak push (dir *.yak).Name
+      env:
+        YAK_TOKEN: ${{ secrets.YAK_TOKEN }}
