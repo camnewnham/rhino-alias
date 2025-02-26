@@ -1,0 +1,9 @@
+---
+name: Alias
+version: <version>
+authors:
+- Cameron Newnham
+description: Add macros from the command line
+url: https://github.com/camnewnham/RH_Alias
+keywords: [alias, macro, command, typo]
+icon: logo.png
