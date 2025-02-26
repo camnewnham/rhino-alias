@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net48</TargetFrameworks>
+    <TargetFrameworks>net48;net7.0</TargetFrameworks>
     <Version>1.0</Version>
     <Title>Alias</Title>
     <Description>A simple command to create persistent aliases</Description>
@@ -14,6 +14,15 @@
   
   <ItemGroup>
     <PackageReference Include="RhinoCommon" Version="6.1.18037.13441" IncludeAssets="compile;build" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="manifest.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   
 </Project>
